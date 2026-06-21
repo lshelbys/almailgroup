@@ -6,103 +6,119 @@
   <title>Almail Group | Security</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --white: #ffffff;
       --off-white: #f8f8f8;
-      --light: #f2f2f2;
-      --border: #e5e5e5;
+      --border-light: #e5e5e5;
       --text-dark: #1a1a1a;
-      --text-mid: #555555;
-      --text-light: #999999;
-      --text-xlight: #cccccc;
-      --accent: #1a1a1a;
+      --text-mid: #555;
+      --text-light: #999;
+      --text-xlight: #ccc;
+      --purple: #7c5cbf;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--text-dark);
+      background: #000;
+      color: var(--white);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    /* ── NAVBAR ── */
+    /* ═══════════════════════════════
+       NAVBAR
+    ═══════════════════════════════ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      height: 70px;
+      height: 80px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 48px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 36px;
+      /* transparent over hero */
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .logo-icon {
-      width: 38px;
-      height: 38px;
+    .nav-logo {
       flex-shrink: 0;
-    }
-
-    .logo-icon svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .logo-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--text-dark);
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links {
+      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 40px;
+    }
+
+    /* White SVG logo approximating the Arabic calligraphic mark */
+    .nav-logo svg {
+      width: 72px;
+      height: 72px;
+      fill: white;
+    }
+
+    .nav-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-center a {
       text-decoration: none;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 400;
-      color: var(--text-mid);
-      letter-spacing: 0.3px;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--text-dark); }
+    .nav-center a:hover { color: #fff; }
+    .nav-center a.active { color: var(--purple); }
 
-    .nav-contact-btn {
-      background: var(--text-dark) !important;
-      color: var(--white) !important;
-      padding: 9px 22px;
-      border-radius: 2px;
-      font-size: 12px !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.5px !important;
-      transition: opacity 0.2s !important;
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
     }
 
-    .nav-contact-btn:hover { opacity: 0.8; color: var(--white) !important; }
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 4px;
+      background: transparent;
+      color: rgba(255,255,255,0.9);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+
+    .lang-btn:hover {
+      border-color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .lang-flag {
+      width: 20px;
+      height: 14px;
+      border-radius: 2px;
+      overflow: hidden;
+      display: inline-block;
+      flex-shrink: 0;
+    }
 
     .hamburger {
       display: none;
@@ -110,172 +126,298 @@
       gap: 5px;
       cursor: pointer;
       padding: 4px;
+      margin-left: auto;
     }
 
     .hamburger span {
-      width: 22px; height: 1.5px;
-      background: var(--text-dark);
+      width: 24px; height: 2px;
+      background: var(--white);
       border-radius: 2px;
     }
 
-    /* ── HERO ── */
+    /* ═══════════════════════════════
+       HERO
+    ═══════════════════════════════ */
     #hero {
       position: relative;
+      width: 100%;
       height: 100vh;
-      min-height: 600px;
+      min-height: 700px;
       overflow: hidden;
-      background: #1c2028;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
-    .hero-photo {
+    /* Simulated dark night-cityscape background */
+    .hero-bg {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.35) 100%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23b8c4d4'/%3E%3Cstop offset='1' stop-color='%23d8dfe8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23sky)'/%3E%3C/svg%3E");
-      background-size: cover;
-      background-position: center;
+        /* dark sky gradient */
+        linear-gradient(180deg,
+          #080a0f 0%,
+          #0d1018 20%,
+          #111520 45%,
+          #0a0c14 70%,
+          #050608 100%
+        );
     }
 
-    /* Simulated glass building facade using CSS */
-    .hero-building {
+    /* Building grid - simulating glass skyscraper windows */
+    .hero-buildings {
       position: absolute;
       inset: 0;
       overflow: hidden;
     }
 
-    .building-grid {
+    /* Main tall building left-center */
+    .bld {
       position: absolute;
-      inset: 0;
-      background-image:
+      bottom: 0;
+    }
+
+    .bld-1 {
+      left: 0; right: 0;
+      height: 100%;
+      background:
+        /* dim overlay */
+        linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.5) 100%);
+    }
+
+    /* Skyscraper silhouettes using repeating gradients */
+    .bld-grid-left {
+      position: absolute;
+      top: 5%;
+      left: 3%;
+      width: 28%;
+      height: 85%;
+      background:
         repeating-linear-gradient(
           0deg,
-          transparent,
-          transparent 58px,
-          rgba(180,195,215,0.35) 58px,
-          rgba(180,195,215,0.35) 60px
+          transparent 0px, transparent 14px,
+          rgba(255,180,60,0.12) 14px, rgba(255,180,60,0.12) 16px
         ),
         repeating-linear-gradient(
           90deg,
-          transparent,
-          transparent 38px,
-          rgba(180,195,215,0.3) 38px,
-          rgba(180,195,215,0.3) 40px
+          transparent 0px, transparent 22px,
+          rgba(60,80,120,0.25) 22px, rgba(60,80,120,0.25) 24px
         );
-      background-color: #8a9ab0;
+      background-color: #0e1420;
+      clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
     }
 
-    .building-overlay {
+    .bld-grid-center {
       position: absolute;
-      inset: 0;
+      top: 0%;
+      left: 28%;
+      width: 22%;
+      height: 100%;
       background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(200,215,230,0.5) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 80% at 20% 60%, rgba(140,160,185,0.4) 0%, transparent 60%),
-        linear-gradient(160deg, rgba(160,180,205,0.6) 0%, rgba(100,120,145,0.7) 50%, rgba(60,80,110,0.8) 100%);
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 13px,
+          rgba(255,160,40,0.15) 13px, rgba(255,160,40,0.15) 15px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 18px,
+          rgba(50,70,110,0.3) 18px, rgba(50,70,110,0.3) 20px
+        );
+      background-color: #0c1018;
     }
 
-    .hero-dim {
+    .bld-grid-right {
+      position: absolute;
+      top: 8%;
+      right: 0%;
+      width: 35%;
+      height: 92%;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px, transparent 12px,
+          rgba(255,140,30,0.1) 12px, rgba(255,140,30,0.1) 14px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px, transparent 20px,
+          rgba(40,60,100,0.2) 20px, rgba(40,60,100,0.2) 22px
+        );
+      background-color: #0b0f1a;
+    }
+
+    /* Gold-lit diamond facade on right building */
+    .bld-diamond {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 42%;
+      height: 70%;
+      background: linear-gradient(135deg,
+        #1a0e00 0%,
+        #3d2200 20%,
+        #8a5000 35%,
+        #c47800 45%,
+        #8a5000 55%,
+        #3d2200 70%,
+        #1a0e00 100%
+      );
+      clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+      opacity: 0.7;
+    }
+
+    /* Diamond pattern on the gold building */
+    .bld-diamond-grid {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 42%;
+      height: 70%;
+      background-image:
+        repeating-linear-gradient(45deg,
+          rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px,
+          transparent 1px, transparent 28px
+        ),
+        repeating-linear-gradient(-45deg,
+          rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px,
+          transparent 1px, transparent 28px
+        );
+      clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* Thin vertical divider line */
+    .bld-divider {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(180,180,200,0.3) 30%, rgba(180,180,200,0.3) 70%, transparent);
+    }
+
+    /* Overall dark overlay so text is readable */
+    .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        to bottom,
-        rgba(20,25,35,0.45) 0%,
-        rgba(20,25,35,0.2) 40%,
-        rgba(20,25,35,0.5) 100%
+        180deg,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.05) 30%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(0,0,0,0.55) 100%
       );
     }
 
+    /* Hero text content - bottom left */
     .hero-content {
       position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 24px;
+      z-index: 10;
+      padding: 0 80px 80px;
+      max-width: 760px;
     }
 
-    .hero-logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(42px, 7vw, 88px);
+    .hero-title {
+      font-size: clamp(52px, 6.5vw, 88px);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.0;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
       font-weight: 400;
       color: rgba(255,255,255,0.92);
-      letter-spacing: 2px;
-      line-height: 1.1;
-      text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+      line-height: 1.7;
+      max-width: 680px;
     }
 
-    .hero-logo-text span {
-      display: block;
-      font-size: clamp(16px, 2.5vw, 26px);
-      font-weight: 300;
-      letter-spacing: 6px;
-      margin-top: 12px;
-      color: rgba(255,255,255,0.7);
-      font-family: 'Inter', sans-serif;
-      text-transform: uppercase;
-    }
-
-    .hero-scroll {
+    /* Down arrow */
+    .hero-arrow {
       position: absolute;
       bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 80px;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.5);
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      gap: 6px;
+      cursor: pointer;
     }
 
-    .hero-scroll-line {
-      width: 1px;
-      height: 40px;
-      background: rgba(255,255,255,0.3);
-      animation: scrollLine 1.5s ease-in-out infinite;
+    .arrow-down {
+      width: 24px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 0.7; transform: scaleY(0.7); }
+    .arrow-down svg {
+      width: 20px;
+      height: 30px;
+      stroke: rgba(255,255,255,0.8);
+      stroke-width: 1.5;
+      fill: none;
     }
 
-    /* ── WHY CHOOSE ── */
-    #why {
-      padding: 100px 48px;
+    /* ═══════════════════════════════
+       SECTIONS BELOW HERO (light theme)
+    ═══════════════════════════════ */
+    .below-hero {
       background: var(--white);
-      text-align: center;
+      color: var(--text-dark);
     }
 
-    .why-inner {
-      max-width: 900px;
-      margin: 0 auto;
+    section.light-section {
+      padding: 100px 80px;
+      background: var(--white);
+    }
+
+    section.gray-section {
+      padding: 100px 80px;
+      background: var(--off-white);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
     .section-heading {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 3.5vw, 44px);
-      font-weight: 400;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700;
       color: var(--text-dark);
-      letter-spacing: 0.5px;
-      line-height: 1.25;
-      margin-bottom: 56px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
     }
 
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.85;
+      max-width: 600px;
+    }
+
+    /* WHY CHOOSE */
     .why-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 56px 48px;
-      text-align: left;
-      margin-bottom: 80px;
+      gap: 56px 60px;
+      margin-top: 64px;
     }
 
-    .why-item-num {
+    .why-num {
       font-size: 11px;
       font-weight: 500;
       color: var(--text-xlight);
@@ -283,256 +425,118 @@
       margin-bottom: 14px;
     }
 
-    .why-item-title {
+    .why-title {
       font-size: 14px;
       font-weight: 600;
       color: var(--text-dark);
       margin-bottom: 10px;
-      letter-spacing: 0.3px;
     }
 
-    .why-item-text {
+    .why-text {
       font-size: 13px;
       color: var(--text-mid);
-      line-height: 1.75;
+      line-height: 1.8;
     }
 
-    /* ── DIVIDER IMAGE ── */
-    .divider-image {
+    /* DIVIDER BAND */
+    .divider-band {
       width: 100%;
       height: 340px;
+      background: #0e1015;
+      position: relative;
       overflow: hidden;
-      position: relative;
     }
 
-    .divider-image-inner {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background-color: #a8b4c0;
-    }
-
-    .div-grid {
+    .divider-band-grid {
       position: absolute;
       inset: 0;
       background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 28px,
-          rgba(200,215,225,0.2) 28px,
-          rgba(200,215,225,0.2) 30px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 18px,
-          rgba(200,215,225,0.15) 18px,
-          rgba(200,215,225,0.15) 20px
-        );
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,0.04) 28px, rgba(255,255,255,0.04) 30px),
+        repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(255,255,255,0.04) 28px, rgba(255,255,255,0.04) 30px);
     }
 
-    .div-overlay {
+    .divider-band-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(160,175,190,0.6),
-        rgba(185,200,215,0.4),
-        rgba(140,160,180,0.7)
-      );
+      background: linear-gradient(135deg, rgba(20,25,40,0.6), rgba(10,14,24,0.8));
     }
 
-    /* ── DIVERSE SERVICES ── */
-    #services {
-      padding: 100px 48px;
-      background: var(--white);
-    }
-
-    .services-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
+    /* SERVICES */
     .services-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
       gap: 80px;
       align-items: start;
     }
 
-    .services-left .section-heading {
-      text-align: left;
-      margin-bottom: 24px;
-    }
-
-    .services-desc {
-      font-size: 14px;
-      color: var(--text-mid);
-      line-height: 1.9;
-      max-width: 420px;
-    }
-
-    .services-right {
+    .services-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
     }
 
-    .service-tile {
+    .svc-tile {
       background: var(--white);
-      padding: 32px 28px;
+      padding: 28px 24px;
       transition: background 0.2s;
-      cursor: default;
     }
 
-    .service-tile:hover { background: var(--off-white); }
+    .svc-tile:hover { background: #fafafa; }
 
-    .service-tile-icon {
-      font-size: 22px;
-      margin-bottom: 14px;
-      opacity: 0.7;
-    }
+    .svc-icon { font-size: 20px; margin-bottom: 12px; opacity: 0.7; }
 
-    .service-tile-name {
+    .svc-name {
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-dark);
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
-    .service-tile-text {
-      font-size: 12px;
-      color: var(--text-light);
-      line-height: 1.65;
-    }
+    .svc-text { font-size: 12px; color: var(--text-light); line-height: 1.65; }
 
-    /* ── PARTNERS STRIP ── */
-    #partners {
-      padding: 70px 48px;
-      background: var(--off-white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .partners-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    .partners-label {
-      text-align: center;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--text-xlight);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 44px;
-    }
-
-    .partners-logos {
+    /* PARTNERS */
+    .partners-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 48px 64px;
+      gap: 48px 72px;
+      margin-top: 44px;
     }
 
-    .partner-logo {
-      opacity: 0.35;
+    .partner-item {
+      opacity: 0.3;
       transition: opacity 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .partner-logo:hover { opacity: 0.65; }
-
-    .partner-logo-text {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-dark);
       letter-spacing: 1px;
       text-transform: uppercase;
-      white-space: nowrap;
     }
 
-    .partner-logo-text.small { font-size: 11px; letter-spacing: 0.5px; }
+    .partner-item:hover { opacity: 0.6; }
 
-    /* ── SECOND DIVIDER IMAGE ── */
-    .divider-image-2 {
-      width: 100%;
-      height: 420px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .divider-image-2-inner {
-      width: 100%;
-      height: 100%;
-      background-color: #b8c4d0;
-      position: relative;
-    }
-
-    .div2-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 100% 80% at 50% 60%, rgba(200,215,230,0.7) 0%, transparent 70%),
-        linear-gradient(180deg, rgba(180,195,210,0.5) 0%, rgba(160,175,195,0.6) 100%);
-    }
-
-    .div2-columns {
-      position: absolute;
-      inset: 0;
-      display: flex;
-    }
-
-    .div2-col {
-      flex: 1;
-      border-right: 1px solid rgba(220,230,240,0.2);
-      background: linear-gradient(180deg, rgba(200,215,230,0.15) 0%, rgba(180,200,220,0.25) 100%);
-    }
-
-    .div2-col:nth-child(even) {
-      background: linear-gradient(180deg, rgba(170,185,205,0.2) 0%, rgba(155,175,200,0.3) 100%);
-    }
-
-    /* ── CLIENTS ── */
-    #clients {
-      padding: 100px 48px;
-      background: var(--white);
-    }
-
-    .clients-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .clients-inner .section-heading {
-      margin-bottom: 64px;
-    }
-
-    .clients-logos {
+    /* CLIENTS */
+    .clients-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-bottom: 80px;
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
+      margin-top: 56px;
     }
 
     .client-cell {
       background: var(--white);
-      padding: 44px 32px;
+      padding: 44px 28px;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
       transition: background 0.2s;
     }
 
@@ -542,87 +546,63 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--text-mid);
-      letter-spacing: 0.5px;
-      text-align: center;
-      line-height: 1.4;
+      line-height: 1.45;
+      letter-spacing: 0.3px;
     }
 
-    .client-name .arabic {
-      display: block;
-      font-size: 14px;
-      margin-top: 4px;
-      font-weight: 400;
-    }
+    .client-name .ar { font-size: 14px; font-weight: 400; display: block; margin-top: 3px; }
 
-    .client-name.featured {
-      font-size: 15px;
-      color: var(--text-dark);
-    }
-
-    /* ── CONTACT BAND ── */
-    #contact-band {
-      padding: 90px 48px;
-      background: var(--off-white);
-      border-top: 1px solid var(--border);
-    }
-
-    .contact-band-inner {
-      max-width: 1080px;
-      margin: 0 auto;
+    /* CONTACT BAND */
+    .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.3fr;
       gap: 80px;
       align-items: start;
     }
 
-    .contact-band-inner .section-heading {
-      text-align: left;
-      margin-bottom: 20px;
+    .contact-info-row {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
     }
 
-    .contact-desc {
-      font-size: 14px;
-      color: var(--text-mid);
-      line-height: 1.8;
-      margin-bottom: 36px;
+    .ci-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
     }
+
+    .ci-value { font-size: 14px; color: var(--text-dark); line-height: 1.65; }
 
     .btn-dark {
       display: inline-block;
       background: var(--text-dark);
       color: var(--white);
       text-decoration: none;
-      padding: 13px 32px;
+      padding: 13px 30px;
       font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.8px;
-      border-radius: 2px;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      margin-top: 8px;
       transition: opacity 0.2s;
     }
 
     .btn-dark:hover { opacity: 0.8; }
 
-    .contact-form-simple {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+    /* Contact Form */
+    .cf { display: flex; flex-direction: column; gap: 16px; }
+    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-    .cf-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .cf-field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .cf-field { display: flex; flex-direction: column; gap: 6px; }
 
     .cf-field label {
       font-size: 10px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-light);
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -632,8 +612,8 @@
     .cf-field select,
     .cf-field textarea {
       background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 2px;
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
       padding: 12px 14px;
       font-family: 'Inter', sans-serif;
       font-size: 13px;
@@ -642,14 +622,12 @@
       transition: border-color 0.2s;
     }
 
-    .cf-field input:focus,
-    .cf-field select:focus,
-    .cf-field textarea:focus {
-      border-color: var(--text-dark);
-    }
-
     .cf-field input::placeholder,
     .cf-field textarea::placeholder { color: var(--text-xlight); }
+
+    .cf-field input:focus,
+    .cf-field select:focus,
+    .cf-field textarea:focus { border-color: #888; }
 
     .cf-field textarea { resize: vertical; min-height: 110px; }
 
@@ -660,467 +638,463 @@
       padding: 14px;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 1px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       cursor: pointer;
-      border-radius: 2px;
+      border-radius: 3px;
       transition: opacity 0.2s;
-      width: 100%;
     }
 
     .cf-submit:hover { opacity: 0.8; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       background: var(--white);
-      border-top: 1px solid var(--border);
-      padding: 70px 48px 36px;
-    }
-
-    .footer-inner {
-      max-width: 1080px;
-      margin: 0 auto;
+      border-top: 1px solid var(--border-light);
+      padding: 70px 80px 32px;
     }
 
     .footer-top {
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
       gap: 60px;
-      padding-bottom: 56px;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border-light);
     }
 
-    .footer-brand-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 400;
+    .footer-logo-name {
+      font-size: 20px;
+      font-weight: 700;
       color: var(--text-dark);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
     }
 
     .footer-tagline {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-light);
       line-height: 1.8;
-      max-width: 280px;
+      max-width: 290px;
     }
 
     .footer-social {
       display: flex;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 10px;
+      margin-top: 22px;
     }
 
-    .footer-social a {
+    .social-icon {
       width: 32px; height: 32px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-light);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      color: var(--text-mid);
+      color: var(--text-light);
       font-size: 13px;
       transition: border-color 0.2s, color 0.2s;
     }
 
-    .footer-social a:hover { border-color: var(--text-dark); color: var(--text-dark); }
+    .social-icon:hover { border-color: var(--text-dark); color: var(--text-dark); }
 
     .footer-col-title {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-dark);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 20px;
     }
 
-    .footer-col ul {
+    .footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 11px;
     }
 
-    .footer-col ul li {
+    .footer-links li,
+    .footer-links a {
       font-size: 13px;
       color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
       line-height: 1.5;
     }
 
-    .footer-col ul li a {
-      text-decoration: none;
-      color: var(--text-light);
-      transition: color 0.2s;
-    }
-
-    .footer-col ul li a:hover { color: var(--text-dark); }
+    .footer-links a:hover { color: var(--text-dark); }
 
     .footer-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 28px;
+      padding-top: 26px;
     }
 
-    .footer-copy {
-      font-size: 12px;
-      color: var(--text-xlight);
-    }
+    .footer-copy { font-size: 12px; color: var(--text-xlight); }
 
-    .footer-legal {
-      display: flex;
-      gap: 24px;
-    }
-
+    .footer-legal { display: flex; gap: 24px; }
     .footer-legal a {
       font-size: 12px;
       color: var(--text-xlight);
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .footer-legal a:hover { color: var(--text-mid); }
 
-    /* ── MOBILE MENU ── */
+    /* MOBILE */
     .mobile-nav {
       display: none;
       position: fixed;
-      top: 70px; left: 0; right: 0; bottom: 0;
-      background: var(--white);
+      top: 80px; left: 0; right: 0; bottom: 0;
+      background: rgba(5,7,12,0.97);
       z-index: 999;
       flex-direction: column;
-      padding: 48px;
-      gap: 32px;
+      padding: 48px 36px;
+      gap: 28px;
     }
 
     .mobile-nav.open { display: flex; }
-
     .mobile-nav a {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 300;
-      color: var(--text-dark);
+      color: var(--white);
       text-decoration: none;
-      font-family: 'Playfair Display', serif;
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
+    .mobile-nav a.active { color: var(--purple); }
+
+    /* FADE IN */
+    .fade { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade.in { opacity: 1; transform: translateY(0); }
+    .fd1 { transition-delay: 0.1s; }
+    .fd2 { transition-delay: 0.2s; }
+    .fd3 { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .nav-center { display: none; }
+      .nav-right { display: none; }
       .hamburger { display: flex; }
 
-      #why, #services, #partners, #clients, #contact-band { padding: 70px 24px; }
-      footer { padding: 60px 24px 30px; }
+      .hero-content { padding: 0 32px 70px; }
+      .hero-arrow { left: 32px; }
 
-      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+      section.light-section,
+      section.gray-section { padding: 70px 32px; }
+      footer { padding: 60px 32px 28px; }
 
+      .why-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
       .services-layout { grid-template-columns: 1fr; gap: 50px; }
-      .services-right { grid-template-columns: 1fr; }
-      .services-desc { max-width: 100%; }
-
-      .clients-logos { grid-template-columns: repeat(2, 1fr); }
-
-      .contact-band-inner { grid-template-columns: 1fr; gap: 50px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-layout { grid-template-columns: 1fr; gap: 50px; }
       .cf-row { grid-template-columns: 1fr; }
-
       .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .footer-legal { flex-wrap: wrap; justify-content: center; }
+      .footer-bottom { flex-direction: column; gap: 14px; }
     }
 
     @media (max-width: 540px) {
-      .clients-logos { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .clients-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
     }
-
-    /* ── FADE IN ── */
-    .fade {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-
-    .fade.in { opacity: 1; transform: translateY(0); }
-
-    .fade-delay-1 { transition-delay: 0.1s; }
-    .fade-delay-2 { transition-delay: 0.2s; }
-    .fade-delay-3 { transition-delay: 0.3s; }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <a href="#hero" class="logo">
-      <div class="logo-icon">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="20" cy="20" r="19" stroke="#1a1a1a" stroke-width="1.5"/>
-          <path d="M20 8 L20 14" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="20" cy="17" r="3" stroke="#1a1a1a" stroke-width="1.5"/>
-          <path d="M12 30 Q20 22 28 30" stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M9 30 L31 30" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M9 30 L12 34" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M31 30 L28 34" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <!-- Almail Group logo mark — stylized Arabic sail/boat shape in white -->
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Base line -->
+      <rect x="10" y="64" width="60" height="4" rx="2" fill="white"/>
+      <!-- Left sail sweep -->
+      <path d="M18 62 Q14 40 22 18 Q26 28 30 62 Z" fill="white"/>
+      <!-- Center mast/peak -->
+      <path d="M36 62 Q34 32 40 10 Q46 32 44 62 Z" fill="white"/>
+      <!-- Right sail sweep -->
+      <path d="M50 62 Q54 28 58 18 Q66 40 62 62 Z" fill="white"/>
+      <!-- Small arc connecting sails -->
+      <path d="M22 46 Q40 38 58 46" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+    </svg>
+  </a>
+
+  <ul class="nav-center">
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="#world">Almail Group World</a></li>
+    <li><a href="#sectors">Our Sectors</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="#" class="lang-btn">
+      <!-- UK flag SVG -->
+      <span class="lang-flag">
+        <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="60" height="40" fill="#012169"/>
+          <path d="M0,0 L60,40 M60,0 L0,40" stroke="white" stroke-width="8"/>
+          <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="5"/>
+          <path d="M30,0 V40 M0,20 H60" stroke="white" stroke-width="12"/>
+          <path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="7"/>
         </svg>
-      </div>
-      <span class="logo-name">Almail Group</span>
+      </span>
+      English
     </a>
-
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#clients">Clients</a></li>
-      <li><a href="#contact-band" class="nav-contact-btn">Contact Us</a></li>
-    </ul>
-
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </nav>
-
-  <!-- MOBILE NAV -->
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#hero" onclick="toggleMenu()">Home</a>
-    <a href="#services" onclick="toggleMenu()">Services</a>
-    <a href="#clients" onclick="toggleMenu()">Clients</a>
-    <a href="#contact-band" onclick="toggleMenu()">Contact</a>
+    <a href="#" class="lang-btn">
+      <!-- Kuwait flag SVG -->
+      <span class="lang-flag">
+        <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="60" height="40" fill="#007A3D"/>
+          <rect y="13" width="60" height="14" fill="white"/>
+          <rect y="26" width="60" height="14" fill="#CE1126"/>
+          <polygon points="0,0 18,20 0,40" fill="black"/>
+        </svg>
+      </span>
+      العربية
+    </a>
   </div>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-building">
-      <div class="building-grid"></div>
-      <div class="building-overlay"></div>
-    </div>
-    <div class="hero-dim"></div>
-    <div class="hero-content">
-      <div class="hero-logo-text fade" id="heroText">
-        Almail Group
-        <span>Security &amp; Smart Solutions</span>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      Scroll
-    </div>
-  </section>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-  <!-- WHY CHOOSE -->
-  <section id="why">
-    <div class="why-inner">
-      <h2 class="section-heading fade">Why Choose Almail Group?</h2>
-      <div class="why-grid">
-        <div class="fade fade-delay-1">
-          <div class="why-item-num">01</div>
-          <div class="why-item-title">Diverse Expertise</div>
-          <p class="why-item-text">A holding group spanning multiple industries — from security systems to real estate, smart home solutions, jewelry, and financial technology.</p>
-        </div>
-        <div class="fade fade-delay-2">
-          <div class="why-item-num">02</div>
-          <div class="why-item-title">Proven Track Record</div>
-          <p class="why-item-text">Trusted by leading companies and institutions across Kuwait and the region, delivering consistent quality and measurable results.</p>
-        </div>
-        <div class="fade fade-delay-3">
-          <div class="why-item-num">03</div>
-          <div class="why-item-title">Innovation at Core</div>
-          <p class="why-item-text">We continuously adopt emerging technologies and best practices to ensure our clients benefit from the most advanced solutions available.</p>
-        </div>
-        <div class="fade fade-delay-1">
-          <div class="why-item-num">04</div>
-          <div class="why-item-title">Client-Centered Approach</div>
-          <p class="why-item-text">Every solution is tailored to the specific needs of our clients. We listen, plan, and execute with precision and care.</p>
-        </div>
-        <div class="fade fade-delay-2">
-          <div class="why-item-num">05</div>
-          <div class="why-item-title">Regional Presence</div>
-          <p class="why-item-text">Headquartered in Kuwait Building Tower, our team of professionals serves clients across the GCC with deep regional understanding.</p>
-        </div>
-        <div class="fade fade-delay-3">
-          <div class="why-item-num">06</div>
-          <div class="why-item-title">End-to-End Solutions</div>
-          <p class="why-item-text">From initial consultation to ongoing support, we provide complete lifecycle management for every product and service we offer.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- MOBILE MENU -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#hero" class="active" onclick="toggleMenu()">Home</a>
+  <a href="#world" onclick="toggleMenu()">Almail Group World</a>
+  <a href="#sectors" onclick="toggleMenu()">Our Sectors</a>
+  <a href="#news" onclick="toggleMenu()">News</a>
+  <a href="#careers" onclick="toggleMenu()">Careers</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
 
-  <!-- DIVIDER IMAGE 1 -->
-  <div class="divider-image">
-    <div class="divider-image-inner">
-      <div class="div-grid"></div>
-      <div class="div-overlay"></div>
-    </div>
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-buildings">
+    <div class="bld-grid-left"></div>
+    <div class="bld-grid-center"></div>
+    <div class="bld-grid-right"></div>
+    <div class="bld-diamond"></div>
+    <div class="bld-diamond-grid"></div>
+    <div class="bld-divider"></div>
+    <div class="bld bld-1"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Almail Group</h1>
+    <p class="hero-desc">
+      A holding group company that provides a diverse array of products and services, including real estate services, construction and maintenance, low voltage technologies, jewelry design, e-commerce, security systems, security guard services, smart home solutions, and delivery.
+    </p>
   </div>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="services-inner">
-      <div class="services-layout">
-        <div class="services-left">
-          <h2 class="section-heading fade">Diverse Service<br />Portfolio</h2>
-          <p class="services-desc fade">
-            Almail Group offers a diverse range of services including real estate, construction, technology, e-commerce, security, and smart home solutions. We are committed to delivering excellence in each domain.
-          </p>
-        </div>
-        <div class="services-right fade">
-          <div class="service-tile">
-            <div class="service-tile-icon">🛡️</div>
-            <div class="service-tile-name">Security</div>
-            <p class="service-tile-text">Security systems, guard services, and surveillance technology for residential and commercial properties.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">🏠</div>
-            <div class="service-tile-name">Smart Solutions</div>
-            <p class="service-tile-text">Smart home automation, low voltage technologies, and integrated building management systems.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">🏢</div>
-            <div class="service-tile-name">Real Estate</div>
-            <p class="service-tile-text">Real estate acquisition, development, property management, and investment advisory services.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">🔧</div>
-            <div class="service-tile-name">Construction</div>
-            <p class="service-tile-text">Construction and maintenance services for commercial, residential, and institutional projects.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">💎</div>
-            <div class="service-tile-name">Jewelry</div>
-            <p class="service-tile-text">Bespoke jewelry design and craftsmanship combining traditional artistry with contemporary vision.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">🛒</div>
-            <div class="service-tile-name">E-Commerce</div>
-            <p class="service-tile-text">Digital commerce platforms, supply chain solutions, and last-mile delivery infrastructure.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">🚚</div>
-            <div class="service-tile-name">Delivery</div>
-            <p class="service-tile-text">Reliable logistics and delivery services connecting businesses with their customers efficiently.</p>
-          </div>
-          <div class="service-tile">
-            <div class="service-tile-icon">💳</div>
-            <div class="service-tile-name">Fin-Tech</div>
-            <p class="service-tile-text">Financial technology solutions streamlining payments and digital financial operations.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PARTNER LOGOS STRIP -->
-  <section id="partners">
-    <div class="partners-inner">
-      <div class="partners-label fade">Our Partners &amp; Subsidiaries</div>
-      <div class="partners-logos fade">
-        <div class="partner-logo">
-          <span class="partner-logo-text">Netnet</span>
-        </div>
-        <div class="partner-logo">
-          <span class="partner-logo-text">Shiplee</span>
-        </div>
-        <div class="partner-logo">
-          <span class="partner-logo-text">Ewan Complex</span>
-        </div>
-        <div class="partner-logo">
-          <span class="partner-logo-text">Millennium</span>
-        </div>
-        <div class="partner-logo">
-          <span class="partner-logo-text small">National Contracting Co.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIVIDER IMAGE 2 -->
-  <div class="divider-image-2">
-    <div class="divider-image-2-inner">
-      <div class="div2-columns">
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-        <div class="div2-col"></div>
-      </div>
-      <div class="div2-overlay"></div>
+  <div class="hero-arrow" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})">
+    <div class="arrow-down">
+      <svg viewBox="0 0 20 30">
+        <line x1="10" y1="2" x2="10" y2="24"/>
+        <polyline points="3,17 10,24 17,17"/>
+      </svg>
     </div>
   </div>
+</section>
 
-  <!-- CLIENTS -->
-  <section id="clients">
-    <div class="clients-inner">
-      <h2 class="section-heading fade">Our Clients</h2>
-      <div class="clients-logos fade">
-        <div class="client-cell">
-          <div class="client-name featured">Ewan Complex</div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name">MILLENNIUM</div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name">MASSALEH</div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name">
-            Awtad
-            <span class="arabic">أوتاد</span>
-          </div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name small">National Contracting Co. Ltd.<br /><span style="font-size:11px;color:#bbb">NCC</span></div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name">E-PORTS<br />AUTHORITY</div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name">Altam Al Kuwait<br /><span style="font-size:11px;font-weight:400">Real Estate Co.</span></div>
-        </div>
-        <div class="client-cell">
-          <div class="client-name">Kuwait<br />Investment Group</div>
-        </div>
+<!-- ═══ WHY CHOOSE ═══ -->
+<section class="light-section" id="why">
+  <div class="section-inner">
+    <h2 class="section-heading fade">Why Choose Almail Group?</h2>
+    <div class="why-grid">
+      <div class="fade fd1">
+        <div class="why-num">01</div>
+        <div class="why-title">Diverse Expertise</div>
+        <p class="why-text">A holding group spanning multiple industries — from security systems to real estate, smart home solutions, jewelry, and financial technology.</p>
+      </div>
+      <div class="fade fd2">
+        <div class="why-num">02</div>
+        <div class="why-title">Proven Track Record</div>
+        <p class="why-text">Trusted by leading companies and institutions across Kuwait and the region, delivering consistent quality and measurable results.</p>
+      </div>
+      <div class="fade fd3">
+        <div class="why-num">03</div>
+        <div class="why-title">Innovation at Core</div>
+        <p class="why-text">Continuously adopting emerging technologies and best practices to ensure clients benefit from the most advanced solutions available.</p>
+      </div>
+      <div class="fade fd1">
+        <div class="why-num">04</div>
+        <div class="why-title">Client-Centered</div>
+        <p class="why-text">Every solution is tailored to the specific needs of our clients. We listen, plan, and execute with precision and care.</p>
+      </div>
+      <div class="fade fd2">
+        <div class="why-num">05</div>
+        <div class="why-title">Regional Presence</div>
+        <p class="why-text">Headquartered in Kuwait Building Tower, our team of professionals serves clients across the GCC with deep regional understanding.</p>
+      </div>
+      <div class="fade fd3">
+        <div class="why-num">06</div>
+        <div class="why-title">End-to-End Solutions</div>
+        <p class="why-text">From initial consultation to ongoing support, we provide complete lifecycle management for every product and service we offer.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT BAND -->
-  <section id="contact-band">
-    <div class="contact-band-inner">
+<!-- DIVIDER -->
+<div class="divider-band">
+  <div class="divider-band-grid"></div>
+  <div class="divider-band-overlay"></div>
+</div>
+
+<!-- ═══ ALMAIL GROUP WORLD / SECTORS ═══ -->
+<section class="light-section" id="world">
+  <div class="section-inner">
+    <div class="services-layout">
       <div>
-        <h2 class="section-heading fade">Get in Touch</h2>
-        <p class="contact-desc fade">
-          Whether you need a security solution, smart home system, or want to explore a business partnership, our team is ready to assist you.
+        <div class="section-label">Diverse Service Portfolio</div>
+        <h2 class="section-heading fade">Almail Group<br />offers a diverse range<br />of services</h2>
+        <p class="section-desc fade">
+          Including real estate services, construction and maintenance, low voltage technologies, jewelry design, e-commerce, security systems, security guard services, smart home solutions, and delivery. We are committed to delivering excellence in each domain.
         </p>
-        <a href="mailto:Info@Almailgroup.com" class="btn-dark fade">Info@Almailgroup.com</a>
+      </div>
+      <div class="services-grid fade">
+        <div class="svc-tile">
+          <div class="svc-icon">🛡️</div>
+          <div class="svc-name">Security Systems</div>
+          <p class="svc-text">Surveillance, access control, and integrated security for residential and commercial properties.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">👮</div>
+          <div class="svc-name">Security Guard</div>
+          <p class="svc-text">Professional guard services with trained personnel protecting people and assets.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">🏠</div>
+          <div class="svc-name">Smart Home</div>
+          <p class="svc-text">Home automation and integrated smart systems for modern living environments.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">🔌</div>
+          <div class="svc-name">Low Voltage Tech</div>
+          <p class="svc-text">Networking, AV systems, and low voltage infrastructure for intelligent buildings.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">🏢</div>
+          <div class="svc-name">Real Estate</div>
+          <p class="svc-text">Acquisition, development, property management, and investment advisory services.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">🔧</div>
+          <div class="svc-name">Construction</div>
+          <p class="svc-text">Construction and maintenance services for commercial and residential projects.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">💎</div>
+          <div class="svc-name">Jewelry Design</div>
+          <p class="svc-text">Bespoke jewelry craftsmanship blending traditional artistry with modern aesthetics.</p>
+        </div>
+        <div class="svc-tile">
+          <div class="svc-icon">🛒</div>
+          <div class="svc-name">E-Commerce</div>
+          <p class="svc-text">Digital commerce platforms and last-mile delivery infrastructure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div style="margin-top: 48px; display: flex; flex-direction: column; gap: 20px;">
+<!-- ═══ PARTNERS ═══ -->
+<section class="gray-section" id="sectors">
+  <div class="section-inner">
+    <div class="section-label fade" style="text-align:center;">Partners &amp; Subsidiaries</div>
+    <div class="partners-row fade">
+      <span class="partner-item">Netnet</span>
+      <span class="partner-item">Shiplee</span>
+      <span class="partner-item">Ewan Complex</span>
+      <span class="partner-item">Millennium</span>
+      <span class="partner-item">NCC</span>
+      <span class="partner-item">E-Ports Authority</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLIENTS ═══ -->
+<section class="light-section" id="news">
+  <div class="section-inner">
+    <h2 class="section-heading fade">Our Clients</h2>
+    <div class="clients-grid fade">
+      <div class="client-cell">
+        <div class="client-name" style="font-size:15px;color:#1a1a1a;">Ewan Complex</div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">MILLENNIUM</div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">MASSALEH</div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">
+          Awtad
+          <span class="ar">أوتاد</span>
+        </div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">National Contracting<br /><span style="font-size:11px;color:#bbb;font-weight:400;">Co. Ltd. (NCC)</span></div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">E-PORTS<br />AUTHORITY</div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">Altam Al Kuwait<br /><span style="font-size:11px;font-weight:400;color:#bbb;">Real Estate Co.</span></div>
+      </div>
+      <div class="client-cell">
+        <div class="client-name">Kuwait<br />Investment Group</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="gray-section" id="contact">
+  <div class="section-inner">
+    <div class="contact-layout">
+      <div>
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-heading fade">Let's Connect</h2>
+        <p class="section-desc fade">
+          Whether you need a security solution, smart home system, or want to explore a business partnership, our team in Kuwait is ready to assist.
+        </p>
+        <div class="contact-info-row fade">
           <div>
-            <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Phone</div>
-            <div style="font-size:15px;color:#1a1a1a;font-weight:400;">+965 - 1808606</div>
+            <div class="ci-label">Phone</div>
+            <div class="ci-value">+965 - 1808606</div>
           </div>
           <div>
-            <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Address</div>
-            <div style="font-size:13px;color:#555;line-height:1.7;">Kuwait Building Tower, Floor 27,<br />Fahad Alsalem Street, Qibla City – Kuwait.</div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value">
+              <a href="mailto:Info@Almailgroup.com" style="color:inherit;text-decoration:none;">Info@Almailgroup.com</a>
+            </div>
           </div>
           <div>
-            <div style="font-size:10px;font-weight:600;color:#999;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Opening Hours</div>
-            <div style="font-size:13px;color:#555;line-height:1.7;">
+            <div class="ci-label">Address</div>
+            <div class="ci-value">Kuwait Building Tower, Floor 27,<br />Fahad Alsalem Street, Qibla City – Kuwait.</div>
+          </div>
+          <div>
+            <div class="ci-label">Opening Hours</div>
+            <div class="ci-value">
               Sunday – Thursday: 8am – 5pm<br />
-              Friday: Closed<br />
-              Saturday: Closed
+              Friday: Closed &nbsp;|&nbsp; Saturday: Closed
             </div>
           </div>
         </div>
       </div>
 
-      <div class="contact-form-simple fade">
+      <div class="cf fade">
         <div class="cf-row">
           <div class="cf-field">
             <label>First Name</label>
@@ -1144,10 +1118,12 @@
           <select>
             <option value="">Select a service...</option>
             <option>Security Systems</option>
+            <option>Security Guard Services</option>
             <option>Smart Home Solutions</option>
+            <option>Low Voltage Technologies</option>
             <option>Real Estate</option>
             <option>Construction &amp; Maintenance</option>
-            <option>Jewelry</option>
+            <option>Jewelry Design</option>
             <option>E-Commerce</option>
             <option>Delivery Services</option>
             <option>Fin-Tech</option>
@@ -1161,117 +1137,112 @@
         <button class="cf-submit" onclick="submitForm(event)">Send Message</button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand-name">
-            <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="20" r="19" stroke="#1a1a1a" stroke-width="1.5"/>
-              <path d="M20 8 L20 14" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="20" cy="17" r="3" stroke="#1a1a1a" stroke-width="1.5"/>
-              <path d="M12 30 Q20 22 28 30" stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-              <path d="M9 30 L31 30" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+<!-- ═══ FOOTER ═══ -->
+<footer id="careers">
+  <div class="section-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-name">Almail Group</div>
+        <p class="footer-tagline">A diversified holding group delivering innovative solutions across security, real estate, smart technology, jewelry, e-commerce, and financial services. Headquartered in Kuwait.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon" title="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
             </svg>
-            Almail Group
-          </div>
-          <p class="footer-tagline">
-            A diversified holding group delivering innovative solutions across security, real estate, smart technology, jewelry, e-commerce, and financial services.
-          </p>
-          <div class="footer-social">
-            <a href="#" title="Instagram">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <circle cx="12" cy="12" r="4"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-col-title">Services</div>
-          <ul>
-            <li>Security</li>
-            <li>Smart Solutions</li>
-            <li>Real Estate</li>
-            <li>Construction</li>
-            <li>Jewelry</li>
-            <li>E-Commerce</li>
-            <li>Delivery</li>
-            <li>Fin-Tech</li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-col-title">Company</div>
-          <ul>
-            <li><a href="#why">Why Almail</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#clients">Our Clients</a></li>
-            <li><a href="#contact-band">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li>+965 - 1808606</li>
-            <li><a href="mailto:Info@Almailgroup.com">Info@Almailgroup.com</a></li>
-            <li style="line-height:1.6;">Kuwait Building Tower, Floor 27, Fahad Alsalem Street, Qibla City – Kuwait</li>
-            <li style="margin-top:4px;">Sun – Thu: 8am – 5pm</li>
-          </ul>
+          </a>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2026 Almail Group. All rights reserved.</div>
-        <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-        </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li>Security Systems</li>
+          <li>Security Guard</li>
+          <li>Smart Home</li>
+          <li>Low Voltage Tech</li>
+          <li>Real Estate</li>
+          <li>Construction</li>
+          <li>Jewelry Design</li>
+          <li>E-Commerce &amp; Delivery</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#why">Why Almail</a></li>
+          <li><a href="#world">Almail Group World</a></li>
+          <li><a href="#sectors">Our Sectors</a></li>
+          <li><a href="#news">Our Clients</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li>+965 - 1808606</li>
+          <li><a href="mailto:Info@Almailgroup.com">Info@Almailgroup.com</a></li>
+          <li>Kuwait Building Tower,<br />Floor 27, Fahad Alsalem St,<br />Qibla City – Kuwait</li>
+          <li style="margin-top:4px;">Sun – Thu: 8am – 5pm</li>
+        </ul>
       </div>
     </div>
-  </footer>
 
-  <script>
-    // Mobile menu
-    function toggleMenu() {
-      document.getElementById('mobileNav').classList.toggle('open');
-    }
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Almail Group. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    // Fade-in on scroll
-    const fades = document.querySelectorAll('.fade');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
 
-    fades.forEach(el => io.observe(el));
+  // Active nav highlight on scroll
+  const sections = ['hero','why','world','sectors','news','contact'];
+  const navLinks = document.querySelectorAll('.nav-center a, .mobile-nav a');
 
-    // Hero text fade on load
-    setTimeout(() => {
-      document.getElementById('heroText').classList.add('in');
-    }, 300);
+  window.addEventListener('scroll', () => {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
 
-    // Contact form
-    function submitForm(e) {
-      e.preventDefault();
-      const btn = e.target;
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = '#2d8a4e';
-      setTimeout(() => {
-        btn.textContent = 'Send Message';
-        btn.style.background = '';
-      }, 3000);
-    }
-  </script>
+  // Fade in on scroll
+  const fades = document.querySelectorAll('.fade');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  fades.forEach(el => io.observe(el));
+
+  // Hero text immediate
+  setTimeout(() => document.querySelector('.hero-title') && document.querySelector('.hero-content'), 200);
+
+  function submitForm(e) {
+    const btn = e.target;
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#2d8a4e';
+    setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; }, 3000);
+  }
+</script>
 </body>
 </html>
