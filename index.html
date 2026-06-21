@@ -32,8 +32,20 @@
     }
 
     /* ═══════════════════════════════
-       NAVBAR
+       NAVBAR — LIQUID GLASS
     ═══════════════════════════════ */
+
+    /* Shimmer keyframe for the iridescent highlight sweep */
+    @keyframes liquidShimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position:  200% center; }
+    }
+
+    @keyframes borderPulse {
+      0%, 100% { opacity: 0.55; }
+      50%       { opacity: 0.85; }
+    }
+
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -42,7 +54,68 @@
       display: flex;
       align-items: center;
       padding: 0 36px;
-      /* transparent over hero */
+
+      /* ── Liquid glass core ── */
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.10) 0%,
+        rgba(255,255,255,0.06) 40%,
+        rgba(200,210,255,0.08) 70%,
+        rgba(255,255,255,0.10) 100%
+      );
+      backdrop-filter: blur(28px) saturate(1.6) brightness(1.1);
+      -webkit-backdrop-filter: blur(28px) saturate(1.6) brightness(1.1);
+
+      /* ── Iridescent top border ── */
+      border-bottom: 1px solid transparent;
+      border-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(180,200,255,0.3) 20%,
+        rgba(255,255,255,0.55) 50%,
+        rgba(200,180,255,0.3) 80%,
+        transparent 100%
+      ) 1;
+
+      /* ── Shimmer overlay via pseudo ── */
+      position: fixed;
+      overflow: hidden;
+    }
+
+    /* Animated shimmer sweep */
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,255,255,0.04) 45%,
+        rgba(220,230,255,0.08) 50%,
+        rgba(255,255,255,0.04) 55%,
+        transparent 70%
+      );
+      background-size: 200% 100%;
+      animation: liquidShimmer 5s linear infinite;
+      pointer-events: none;
+    }
+
+    /* Subtle inner highlight at the top edge */
+    nav::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.5) 30%,
+        rgba(200,220,255,0.7) 50%,
+        rgba(255,255,255,0.5) 70%,
+        transparent 100%
+      );
+      animation: borderPulse 4s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .nav-logo {
@@ -50,6 +123,8 @@
       text-decoration: none;
       display: flex;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     /* White SVG logo approximating the Arabic calligraphic mark */
@@ -57,6 +132,7 @@
       width: 72px;
       height: 72px;
       fill: white;
+      filter: drop-shadow(0 0 8px rgba(200,220,255,0.4));
     }
 
     .nav-center {
@@ -66,19 +142,25 @@
       justify-content: center;
       gap: 36px;
       list-style: none;
+      position: relative;
+      z-index: 1;
     }
 
     .nav-center a {
       text-decoration: none;
       font-size: 14px;
       font-weight: 400;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.88);
       letter-spacing: 0.2px;
       white-space: nowrap;
-      transition: color 0.2s;
+      transition: color 0.2s, text-shadow 0.2s;
     }
 
-    .nav-center a:hover { color: #fff; }
+    .nav-center a:hover {
+      color: #fff;
+      text-shadow: 0 0 12px rgba(200,220,255,0.6);
+    }
+
     .nav-center a.active { color: var(--purple); }
 
     .nav-right {
@@ -86,38 +168,86 @@
       align-items: center;
       gap: 8px;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
+    /* ── Language button — liquid glass pill ── */
     .lang-btn {
       display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 6px 14px;
-      border: 1px solid rgba(255,255,255,0.55);
-      border-radius: 4px;
-      background: transparent;
-      color: rgba(255,255,255,0.9);
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 400;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 100px;
       cursor: pointer;
       text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
       white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      position: relative;
+      overflow: hidden;
+
+      /* Glass pill background */
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.15) 0%,
+        rgba(200,215,255,0.10) 50%,
+        rgba(255,255,255,0.15) 100%
+      );
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      /* Gradient border via outline trick */
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        inset 0 -1px 0 rgba(0,0,0,0.08),
+        0 2px 12px rgba(0,0,0,0.15);
+
+      transition: background 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+
+    /* Shimmer sweep on the pill */
+    .lang-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(255,255,255,0.15) 50%,
+        transparent 65%
+      );
+      background-size: 200% 100%;
+      animation: liquidShimmer 3.5s linear infinite;
+      pointer-events: none;
     }
 
     .lang-btn:hover {
-      border-color: rgba(255,255,255,0.9);
-      background: rgba(255,255,255,0.08);
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.22) 0%,
+        rgba(200,215,255,0.16) 50%,
+        rgba(255,255,255,0.22) 100%
+      );
+      border-color: rgba(255,255,255,0.55);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 0 rgba(0,0,0,0.05),
+        0 4px 20px rgba(180,200,255,0.2);
     }
 
     .lang-flag {
       width: 20px;
       height: 14px;
-      border-radius: 2px;
+      border-radius: 3px;
       overflow: hidden;
       display: inline-block;
       flex-shrink: 0;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.2);
     }
 
     .hamburger {
@@ -127,6 +257,8 @@
       cursor: pointer;
       padding: 4px;
       margin-left: auto;
+      position: relative;
+      z-index: 1;
     }
 
     .hamburger span {
@@ -833,8 +965,23 @@
   </ul>
 
   <div class="nav-right">
-    <a href="#" class="lang-btn">
-      <!-- UK flag SVG -->
+    <!-- Only one button shown at a time: shows the OTHER language to switch to -->
+
+    <!-- Shown when current lang is English → click to go Arabic -->
+    <a href="#" class="lang-btn" id="btn-to-arabic" onclick="switchLang('ar'); return false;">
+      <span class="lang-flag">
+        <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+          <rect width="60" height="40" fill="#007A3D"/>
+          <rect y="13" width="60" height="14" fill="white"/>
+          <rect y="26" width="60" height="14" fill="#CE1126"/>
+          <polygon points="0,0 18,20 0,40" fill="black"/>
+        </svg>
+      </span>
+      العربية
+    </a>
+
+    <!-- Shown when current lang is Arabic → click to go English (hidden by default) -->
+    <a href="#" class="lang-btn" id="btn-to-english" style="display:none;" onclick="switchLang('en'); return false;">
       <span class="lang-flag">
         <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
           <rect width="60" height="40" fill="#012169"/>
@@ -845,18 +992,6 @@
         </svg>
       </span>
       English
-    </a>
-    <a href="#" class="lang-btn">
-      <!-- Kuwait flag SVG -->
-      <span class="lang-flag">
-        <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
-          <rect width="60" height="40" fill="#007A3D"/>
-          <rect y="13" width="60" height="14" fill="white"/>
-          <rect y="26" width="60" height="14" fill="#CE1126"/>
-          <polygon points="0,0 18,20 0,40" fill="black"/>
-        </svg>
-      </span>
-      العربية
     </a>
   </div>
 
@@ -1207,6 +1342,29 @@
 <script>
   function toggleMenu() {
     document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  // Language switcher — shows only the opposite language as an option
+  let currentLang = 'en';
+
+  function switchLang(lang) {
+    currentLang = lang;
+    const btnToAr = document.getElementById('btn-to-arabic');
+    const btnToEn = document.getElementById('btn-to-english');
+
+    if (lang === 'ar') {
+      // Now in Arabic — show only the English button
+      btnToAr.style.display = 'none';
+      btnToEn.style.display = 'flex';
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.documentElement.setAttribute('lang', 'ar');
+    } else {
+      // Now in English — show only the Arabic button
+      btnToAr.style.display = 'flex';
+      btnToEn.style.display = 'none';
+      document.documentElement.setAttribute('dir', 'ltr');
+      document.documentElement.setAttribute('lang', 'en');
+    }
   }
 
   // Active nav highlight on scroll
