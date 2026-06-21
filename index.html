@@ -181,12 +181,16 @@
       z-index: 1;
     }
 
-    /* White SVG logo approximating the Arabic calligraphic mark */
-    .nav-logo svg {
-      width: 72px;
-      height: 72px;
-      fill: white;
-      filter: drop-shadow(0 0 8px rgba(200,220,255,0.4));
+    .nav-logo img {
+      height: 56px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(200,220,255,0.35));
+      transition: filter 0.35s ease;
+    }
+
+    nav.scrolled .nav-logo img {
+      filter: drop-shadow(0 0 6px rgba(120,140,200,0.2));
     }
 
     .nav-center {
@@ -994,19 +998,7 @@
 <!-- ═══ NAVBAR ═══ -->
 <nav id="navbar">
   <a href="#hero" class="nav-logo">
-    <!-- Almail Group logo mark — stylized Arabic sail/boat shape in white -->
-    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Base line -->
-      <rect x="10" y="64" width="60" height="4" rx="2" fill="white"/>
-      <!-- Left sail sweep -->
-      <path d="M18 62 Q14 40 22 18 Q26 28 30 62 Z" fill="white"/>
-      <!-- Center mast/peak -->
-      <path d="M36 62 Q34 32 40 10 Q46 32 44 62 Z" fill="white"/>
-      <!-- Right sail sweep -->
-      <path d="M50 62 Q54 28 58 18 Q66 40 62 62 Z" fill="white"/>
-      <!-- Small arc connecting sails -->
-      <path d="M22 46 Q40 38 58 46" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
-    </svg>
+    <img src="almaillogo.png" alt="Almail Group" />
   </a>
 
   <ul class="nav-center">
@@ -1334,7 +1326,9 @@
   <div class="section-inner">
     <div class="footer-top">
       <div>
-        <div class="footer-logo-name">Almail Group</div>
+        <div class="footer-logo-name">
+        <img src="almaillogo.png" alt="Almail Group" style="height:48px;width:auto;display:block;opacity:0.85;" />
+      </div>
         <p class="footer-tagline">A diversified holding group delivering innovative solutions across security, real estate, smart technology, jewelry, e-commerce, and financial services. Headquartered in Kuwait.</p>
         <div class="footer-social">
           <a href="#" class="social-icon" title="Instagram">
