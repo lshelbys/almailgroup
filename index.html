@@ -11,22 +11,29 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --white: #ffffff;
-      --off-white: #f8f8f8;
-      --border-light: #e5e5e5;
-      --text-dark: #1a1a1a;
-      --text-mid: #555;
-      --text-light: #999;
-      --text-xlight: #ccc;
-      --purple: #7c5cbf;
+      --bg:        #0a0a0a;
+      --bg-alt:    #111111;
+      --border:    rgba(255,255,255,0.10);
+      --border-md: rgba(255,255,255,0.16);
+      --white:     #ffffff;
+      --text-hi:   rgba(255,255,255,0.95);
+      --text-mid:  rgba(255,255,255,0.55);
+      --text-dim:  rgba(255,255,255,0.30);
+      --purple:    #7c5cbf;
+      /* legacy aliases kept so nothing breaks */
+      --off-white:    #111111;
+      --border-light: rgba(255,255,255,0.10);
+      --text-dark:    rgba(255,255,255,0.95);
+      --text-light:   rgba(255,255,255,0.40);
+      --text-xlight:  rgba(255,255,255,0.25);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #000;
-      color: var(--white);
+      background: var(--bg);
+      color: var(--text-hi);
       line-height: 1.6;
       overflow-x: hidden;
     }
@@ -77,64 +84,21 @@
         box-shadow 0.35s ease;
     }
 
-    /* ── Scrolled state: light glass over white sections ── */
+    /* ── Scrolled state: dark glass over dark sections ── */
     nav.scrolled {
       background: linear-gradient(
         135deg,
-        rgba(255,255,255,0.72) 0%,
-        rgba(240,244,255,0.65) 40%,
-        rgba(248,250,255,0.70) 70%,
-        rgba(255,255,255,0.72) 100%
+        rgba(10,10,10,0.82) 0%,
+        rgba(15,15,18,0.78) 50%,
+        rgba(10,10,10,0.82) 100%
       );
-      backdrop-filter: blur(32px) saturate(1.8) brightness(1.05);
-      -webkit-backdrop-filter: blur(32px) saturate(1.8) brightness(1.05);
-      border-bottom-color: rgba(160,180,220,0.25);
+      backdrop-filter: blur(32px) saturate(1.5) brightness(0.95);
+      -webkit-backdrop-filter: blur(32px) saturate(1.5) brightness(0.95);
+      border-bottom-color: rgba(255,255,255,0.08);
       box-shadow:
-        0 1px 0 rgba(255,255,255,0.6) inset,
-        0 4px 24px rgba(0,0,0,0.08);
+        0 1px 0 rgba(255,255,255,0.05) inset,
+        0 4px 24px rgba(0,0,0,0.4);
     }
-
-    /* nav links go dark when scrolled */
-    nav.scrolled .nav-center a {
-      color: rgba(20,20,35,0.8);
-      text-shadow: none;
-    }
-    nav.scrolled .nav-center a:hover { color: #0a0a1a; }
-    nav.scrolled .nav-center a.active { color: var(--purple); }
-
-    /* logo gets dark tint when scrolled */
-    nav.scrolled .nav-logo svg {
-      fill: #0f1020;
-      filter: drop-shadow(0 0 6px rgba(120,140,200,0.2));
-    }
-
-    /* language pill goes dark-glass when scrolled */
-    nav.scrolled .lang-btn {
-      background: linear-gradient(
-        135deg,
-        rgba(20,25,50,0.10) 0%,
-        rgba(40,50,100,0.07) 50%,
-        rgba(20,25,50,0.10) 100%
-      );
-      border-color: rgba(30,40,80,0.25);
-      color: rgba(15,20,40,0.85);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.5),
-        inset 0 -1px 0 rgba(0,0,0,0.04),
-        0 2px 10px rgba(0,0,0,0.06);
-    }
-    nav.scrolled .lang-btn:hover {
-      background: linear-gradient(
-        135deg,
-        rgba(20,25,50,0.16) 0%,
-        rgba(40,50,100,0.12) 50%,
-        rgba(20,25,50,0.16) 100%
-      );
-      border-color: rgba(30,40,80,0.4);
-    }
-
-    /* hamburger goes dark when scrolled */
-    nav.scrolled .hamburger span { background: #0f1020; }
 
     /* Animated shimmer sweep */
     nav::before {
@@ -553,23 +517,18 @@
     }
 
     /* ═══════════════════════════════
-       SECTIONS BELOW HERO (light theme)
+       SECTIONS — DARK THEME
     ═══════════════════════════════ */
-    .below-hero {
-      background: var(--white);
-      color: var(--text-dark);
-    }
-
     section.light-section {
       padding: 100px 80px;
-      background: var(--white);
+      background: var(--bg);
     }
 
     section.gray-section {
       padding: 100px 80px;
-      background: var(--off-white);
-      border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .section-inner { max-width: 1160px; margin: 0 auto; }
@@ -577,7 +536,7 @@
     .section-label {
       font-size: 10px;
       font-weight: 600;
-      color: var(--text-light);
+      color: var(--text-dim);
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: 16px;
@@ -586,7 +545,7 @@
     .section-heading {
       font-size: clamp(28px, 3.5vw, 44px);
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--white);
       line-height: 1.2;
       margin-bottom: 20px;
       letter-spacing: -0.5px;
@@ -610,7 +569,7 @@
     .why-num {
       font-size: 11px;
       font-weight: 500;
-      color: var(--text-xlight);
+      color: var(--text-dim);
       letter-spacing: 2px;
       margin-bottom: 14px;
     }
@@ -618,7 +577,7 @@
     .why-title {
       font-size: 14px;
       font-weight: 600;
-      color: var(--text-dark);
+      color: var(--white);
       margin-bottom: 10px;
     }
 
@@ -663,30 +622,28 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: var(--border-light);
-      border: 1px solid var(--border-light);
+      background: var(--border);
+      border: 1px solid var(--border);
     }
 
     .svc-tile {
-      background: var(--white);
+      background: var(--bg);
       padding: 28px 24px;
       transition: background 0.2s;
     }
 
-    .svc-tile:hover { background: #fafafa; }
-
-    .svc-icon { font-size: 20px; margin-bottom: 12px; opacity: 0.7; }
+    .svc-tile:hover { background: #161616; }
 
     .svc-name {
       font-size: 12px;
-      font-weight: 700;
-      color: var(--text-dark);
+      font-weight: 600;
+      color: var(--white);
       letter-spacing: 0.8px;
       text-transform: uppercase;
       margin-bottom: 7px;
     }
 
-    .svc-text { font-size: 12px; color: var(--text-light); line-height: 1.65; }
+    .svc-text { font-size: 12px; color: var(--text-mid); line-height: 1.65; }
 
     /* PARTNERS */
     .partners-row {
@@ -699,11 +656,11 @@
     }
 
     .partner-item {
-      opacity: 0.3;
+      opacity: 0.25;
       transition: opacity 0.2s;
       font-size: 14px;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--white);
       letter-spacing: 1px;
       text-transform: uppercase;
     }
@@ -715,13 +672,13 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1px;
-      background: var(--border-light);
-      border: 1px solid var(--border-light);
+      background: var(--border);
+      border: 1px solid var(--border);
       margin-top: 56px;
     }
 
     .client-cell {
-      background: var(--white);
+      background: var(--bg-alt);
       padding: 44px 28px;
       display: flex;
       align-items: center;
@@ -730,7 +687,7 @@
       transition: background 0.2s;
     }
 
-    .client-cell:hover { background: var(--off-white); }
+    .client-cell:hover { background: #181818; }
 
     .client-name {
       font-size: 13px;
@@ -760,29 +717,29 @@
     .ci-label {
       font-size: 10px;
       font-weight: 600;
-      color: var(--text-light);
+      color: var(--text-dim);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 5px;
     }
 
-    .ci-value { font-size: 14px; color: var(--text-dark); line-height: 1.65; }
+    .ci-value { font-size: 14px; color: var(--text-hi); line-height: 1.65; }
 
     .btn-dark {
       display: inline-block;
-      background: var(--text-dark);
-      color: var(--white);
+      background: var(--white);
+      color: #0a0a0a;
       text-decoration: none;
       padding: 13px 30px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 1px;
       border-radius: 3px;
       margin-top: 8px;
       transition: opacity 0.2s;
     }
 
-    .btn-dark:hover { opacity: 0.8; }
+    .btn-dark:hover { opacity: 0.85; }
 
     /* Contact Form */
     .cf { display: flex; flex-direction: column; gap: 16px; }
@@ -793,7 +750,7 @@
     .cf-field label {
       font-size: 10px;
       font-weight: 600;
-      color: var(--text-light);
+      color: var(--text-dim);
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
@@ -801,34 +758,36 @@
     .cf-field input,
     .cf-field select,
     .cf-field textarea {
-      background: var(--white);
-      border: 1px solid var(--border-light);
+      background: #161616;
+      border: 1px solid var(--border);
       border-radius: 3px;
       padding: 12px 14px;
       font-family: 'Inter', sans-serif;
       font-size: 13px;
-      color: var(--text-dark);
+      color: var(--white);
       outline: none;
       transition: border-color 0.2s;
     }
 
+    .cf-field select option { background: #1a1a1a; }
+
     .cf-field input::placeholder,
-    .cf-field textarea::placeholder { color: var(--text-xlight); }
+    .cf-field textarea::placeholder { color: var(--text-dim); }
 
     .cf-field input:focus,
     .cf-field select:focus,
-    .cf-field textarea:focus { border-color: #888; }
+    .cf-field textarea:focus { border-color: rgba(255,255,255,0.35); }
 
     .cf-field textarea { resize: vertical; min-height: 110px; }
 
     .cf-submit {
-      background: var(--text-dark);
-      color: var(--white);
+      background: var(--white);
+      color: #0a0a0a;
       border: none;
       padding: 14px;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 1.2px;
       text-transform: uppercase;
       cursor: pointer;
@@ -836,12 +795,12 @@
       transition: opacity 0.2s;
     }
 
-    .cf-submit:hover { opacity: 0.8; }
+    .cf-submit:hover { opacity: 0.85; }
 
     /* FOOTER */
     footer {
-      background: var(--white);
-      border-top: 1px solid var(--border-light);
+      background: #060606;
+      border-top: 1px solid var(--border);
       padding: 70px 80px 32px;
     }
 
@@ -850,20 +809,19 @@
       grid-template-columns: 1.6fr 1fr 1fr 1fr;
       gap: 60px;
       padding-bottom: 52px;
-      border-bottom: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border);
     }
 
     .footer-logo-name {
       font-size: 20px;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--white);
       margin-bottom: 14px;
-      letter-spacing: -0.3px;
     }
 
     .footer-tagline {
       font-size: 13px;
-      color: var(--text-light);
+      color: var(--text-mid);
       line-height: 1.8;
       max-width: 290px;
     }
@@ -876,23 +834,23 @@
 
     .social-icon {
       width: 32px; height: 32px;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      color: var(--text-light);
+      color: var(--text-mid);
       font-size: 13px;
       transition: border-color 0.2s, color 0.2s;
     }
 
-    .social-icon:hover { border-color: var(--text-dark); color: var(--text-dark); }
+    .social-icon:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
 
     .footer-col-title {
       font-size: 11px;
       font-weight: 700;
-      color: var(--text-dark);
+      color: var(--white);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 20px;
@@ -908,13 +866,13 @@
     .footer-links li,
     .footer-links a {
       font-size: 13px;
-      color: var(--text-light);
+      color: var(--text-mid);
       text-decoration: none;
       transition: color 0.2s;
       line-height: 1.5;
     }
 
-    .footer-links a:hover { color: var(--text-dark); }
+    .footer-links a:hover { color: var(--white); }
 
     .footer-bottom {
       display: flex;
@@ -923,12 +881,12 @@
       padding-top: 26px;
     }
 
-    .footer-copy { font-size: 12px; color: var(--text-xlight); }
+    .footer-copy { font-size: 12px; color: var(--text-dim); }
 
     .footer-legal { display: flex; gap: 24px; }
     .footer-legal a {
       font-size: 12px;
-      color: var(--text-xlight);
+      color: var(--text-dim);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -1145,42 +1103,34 @@
       </div>
       <div class="services-grid fade">
         <div class="svc-tile">
-          <div class="svc-icon">🛡️</div>
           <div class="svc-name">Security Systems</div>
           <p class="svc-text">Surveillance, access control, and integrated security for residential and commercial properties.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">👮</div>
           <div class="svc-name">Security Guard</div>
           <p class="svc-text">Professional guard services with trained personnel protecting people and assets.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">🏠</div>
           <div class="svc-name">Smart Home</div>
           <p class="svc-text">Home automation and integrated smart systems for modern living environments.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">🔌</div>
           <div class="svc-name">Low Voltage Tech</div>
           <p class="svc-text">Networking, AV systems, and low voltage infrastructure for intelligent buildings.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">🏢</div>
           <div class="svc-name">Real Estate</div>
           <p class="svc-text">Acquisition, development, property management, and investment advisory services.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">🔧</div>
           <div class="svc-name">Construction</div>
           <p class="svc-text">Construction and maintenance services for commercial and residential projects.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">💎</div>
           <div class="svc-name">Jewelry Design</div>
           <p class="svc-text">Bespoke jewelry craftsmanship blending traditional artistry with modern aesthetics.</p>
         </div>
         <div class="svc-tile">
-          <div class="svc-icon">🛒</div>
           <div class="svc-name">E-Commerce</div>
           <p class="svc-text">Digital commerce platforms and last-mile delivery infrastructure.</p>
         </div>
@@ -1210,7 +1160,7 @@
     <h2 class="section-heading fade">Our Clients</h2>
     <div class="clients-grid fade">
       <div class="client-cell">
-        <div class="client-name" style="font-size:15px;color:#1a1a1a;">Ewan Complex</div>
+        <div class="client-name" style="color:rgba(255,255,255,0.75);font-size:15px;">Ewan Complex</div>
       </div>
       <div class="client-cell">
         <div class="client-name">MILLENNIUM</div>
@@ -1225,13 +1175,13 @@
         </div>
       </div>
       <div class="client-cell">
-        <div class="client-name">National Contracting<br /><span style="font-size:11px;color:#bbb;font-weight:400;">Co. Ltd. (NCC)</span></div>
+        <div class="client-name">National Contracting<br /><span style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.3);">Co. Ltd. (NCC)</span></div>
       </div>
       <div class="client-cell">
         <div class="client-name">E-PORTS<br />AUTHORITY</div>
       </div>
       <div class="client-cell">
-        <div class="client-name">Altam Al Kuwait<br /><span style="font-size:11px;font-weight:400;color:#bbb;">Real Estate Co.</span></div>
+        <div class="client-name">Altam Al Kuwait<br /><span style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.3);">Real Estate Co.</span></div>
       </div>
       <div class="client-cell">
         <div class="client-name">Kuwait<br />Investment Group</div>
